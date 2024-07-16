@@ -62,7 +62,6 @@ cssselect2==0.7.0
 html5lib==1.1
 lxml==4.9.2
 oscrypto==1.3.0
-pisa==3.0.33
 pydyf==0.6.0
 pyHanko==0.17.2
 pyhanko-certvalidator==0.20.1
