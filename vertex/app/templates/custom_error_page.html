@@ -1,0 +1,26 @@
+<!-- templates/500.html -->
+<!-- Custom Error landing page -->
+
+<!-- based on ideas from -->
+<!-- https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/ -->
+
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted -->
+{% block content %}
+
+<div class="ml-5 mt-5 mr-5">
+
+        <div class="jumbotron">
+          <h1 class="display-4">{{ name }}</h1>
+          <p class="lead">Oops! Something went wrong. In the meantime, you can try refreshing the page or navigating back to the previous page. </p>
+          <p class="lead">
+            <a href="{{url_for('public.index')}}">
+              <button type="button" onclick='' class="btn btn-outline-primary btn-sm">Return to Homepage</button>
+            </a>
+          </p>
+        </div>
+</div>
+
+{% endblock %}

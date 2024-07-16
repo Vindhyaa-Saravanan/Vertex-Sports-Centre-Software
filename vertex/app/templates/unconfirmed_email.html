@@ -1,0 +1,28 @@
+<!-- vertex/app/templates/unconfirmed_email.html -->
+
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<!-- Block content to be substituted -->
+{% block content %}
+
+<div class="text-center">
+
+    <h1>Confirm your Email Address</h1>
+    <br />
+    <p>
+      You have not confirmed your email address. 
+      Please check your inbox (and your spam folder) - 
+      you should have received an email with a confirmation link.
+    </p>
+
+    <h2>Didn't get the email?</h2>
+    <p>
+    <!-- Button to confirm email -->
+    <button onclick="{{ url_for('public.resend_confirmation') }}" class="btn btn-primary">Resend Confirmation Email</button>
+    </p>
+  </div>
+  </div>
+
+{% endblock %}

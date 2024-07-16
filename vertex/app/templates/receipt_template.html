@@ -1,0 +1,42 @@
+
+      <div class="ml-5 mt-5 mr-5">
+
+        <!-- Brand/logo -->
+            <img src="/static/images/logo.jpeg" alt="Logo" style="width: 40px; height: 40px;">
+            
+            <h1>Vertex Sports</h1>
+
+            <h3>Payment Receipt</h3>
+
+            <h2>Thank you for choosing Vertex!</h2> <br>
+            
+            <p>Your payment of <strong>£ {{price}}</strong> has been successfully completed!</p> <br>
+
+            <h3>Payment Summary</h3>
+
+            <table class="class-table">
+              <tr>
+                <th>Serial Number</th>
+                <th>Item Description</th>
+                <th>Item Price</th>
+              </tr>
+              <tr>
+                <th>1</th>
+                <th>Booking/Membership</th>
+                <th>£ {{price}}</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>Applied Discount</th>
+                <th>
+                  {% if discount == 0 %}
+                  0 %
+                  {% endif %}
+                  
+                  {% if discount != 0 %}
+                  {{ discount }} %
+                  {% endif %}
+                </th>
+              </tr>
+            </table>
+</div>

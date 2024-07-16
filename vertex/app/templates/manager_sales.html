@@ -1,0 +1,49 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content" id="main-manager-body">
+    <div class="m-5">
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+
+        <h3> Manager Analytics - Sales</h3>
+
+        <a href="{{url_for('admin.download_sales')}}">
+            <button type="button" class="btn btn-success">Download PDF Report</button>
+        </a>
+
+        <h2>Sales statistics of all classes over the last week</h2>
+        <img src="/plots/13" alt="Classes Sales Stats">
+
+        <h2>Sales statistics of all facilities over the last week</h2>
+        <p>SP = Swimming Pool<br>
+            FR = Fitness Room<br>
+            SC1 = Squash Court 1<br>
+            SC2 = Squash Court 2<br>
+            SH = Sports Hall<br>
+            CW = Climbing Wall<br>
+            S = Studio<br>
+        </p>
+        <img src="/plots/12" alt="Facilities Sales Stats">
+
+        <h2>Ranked sales statistics of all sales over the last week</h2>
+        <img src="/plots/14" alt="Sales Stats">
+
+    </div>
+</div>
+{% endblock %}

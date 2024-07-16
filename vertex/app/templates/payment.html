@@ -1,0 +1,60 @@
+<!-- vertex/app/templates/payment.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="background-image"></div>
+	<div class="transparent-column">
+      <div class="ml-5 mt-5 mr-5">
+    <body>
+      <h1>Complete your Payment</h1>
+
+      <h3>Payment Summary</h3>
+
+        <form action="/charge/{{price}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <table class="class-table">
+              <tr>
+                <th>Serial Number</th>
+                <th>Item Description</th>
+                <th>Item Price</th>
+              </tr>
+              <tr>
+                <th>1</th>
+                <th>Booking/Membership</th>
+                <th>£ {{price}}</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>Applied Discount</th>
+                <th>
+                  {% if discount == 0 %}
+                  0 %
+                  {% endif %}
+                  
+                  {% if discount != 0 %}
+                  {{ discount }} %
+                  {% endif %}
+                </th>
+              </tr>
+            </table>
+            <br>
+            <p>To implement a faster checkout process for further payments, your card details will be saved.</p>
+
+          
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="{{ key }}"
+                    data-description="Payment Details"
+                    data-amount="{{ amount }}"
+                    data-locale="auto"
+                    data-email="{{ email }}"> 
+              var stripe = Stripe('pk_test_51MlLsPEBN8eD4T9ejD9GBbWlhud3Hsd9dOd3VXCejQUpGm2Xn7OawbuyLvXNNKcZXOnR3ScjqBZSPDcPYOFViYXs00bFIqO5wQ')
+            </script>
+
+        </form>
+        </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+	
+
+	<h3>
+		<a href="{{url_for('admin.memberships')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to membership scheme list</button>
+		</a>
+		<a href="{{ url_for('admin.delete_membership', id=target['id']) }}">
+			<button class="btn btn-outline-danger ml-1 btn-sm">Delete membership scheme</button>
+		</a>
+		<br><br>
+		Editing membership scheme {{target["id"]}}
+	</h3>
+
+	<hr>
+
+	<div class="ml-4">
+		<p>Blank fields will remain unchanged.</p>
+		<form method="POST" action="{{ url_for('admin.edit_membership', id=target['id']) }}">
+			{{ form.hidden_tag() }}
+			<table width="60%">
+				<tr>
+					<td>Old name:</td> 
+					<td>{{target["name"]}}</td>
+					<td>New name:</td> 
+					<td>{{ form.new_name(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old duration (in number of months):</td>
+					<td>{{target["months"]}}</td>
+					<td>New duration (in number of months):</td>
+					<td>{{ form.new_months(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old price:</td>
+					<td>{{target["price"]}}</td>
+					<td>New price:</td>
+					<td>{{ form.new_price(value='') }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Submit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br>
+</div>
+</div>
+
+{% endblock %}

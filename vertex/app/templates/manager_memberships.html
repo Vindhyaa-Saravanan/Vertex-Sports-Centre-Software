@@ -1,0 +1,60 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.index')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+		</a>
+		<a href="{{url_for('admin.new_membership')}}">
+			<button type="button" class="btn btn-outline-success btn-sm ml-1">Add a new membership scheme</button>
+		</a>
+		<br><br>
+		Memberships
+	</h3>
+
+	<hr>
+
+	<input type="text" id="myInput" onkeyup="myTableSearchFunction()" placeholder="Search for entry by name.." title="Type in a name">
+	<table class="user-table" id="myTable">
+		<tr>
+			<th>Membership Scheme ID</th>
+            <th>Name of Membership</th>
+			<th>Duration</th>
+			<th>Price</th>
+            <th></th>
+		</tr>
+		{% for membership in memberships %}
+		<tr>
+			<td>{{membership["id"]}}</td>
+			<td>{{membership["name"]}}</td>
+			<td>{{ membership["months"] }} month(s)</td>
+			<td>£ {{membership["price"]}}</td>
+			<td>
+				<a href="{{ url_for('admin.edit_membership', id=membership['id']) }}">
+					<button type="button" class="btn btn-outline-primary btn-sm">Edit Membership Scheme</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+</div>
+
+{% endblock %}

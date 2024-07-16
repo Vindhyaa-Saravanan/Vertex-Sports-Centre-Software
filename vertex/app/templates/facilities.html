@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="ml-5 mt-5">
+    <h3>Gym Facilities</h3>
+    <hr>
+    <br>
+
+<!-- create a table for the facilities -->
+<table class="facilities-table">
+    <tr>
+        <th>Name</th>
+        <th>Opening times</th>
+        <th>Capacity</th>
+        <th>Activities</th>
+        <th>Prices</th>
+        <th>Book</th>
+    </tr>
+    {% for x in facilities %} <!-- loop through the facilities to create each row of the table -->
+    <tr>
+        <td>{{ x.name }}</td>
+        <td>{{ x.open }} - {{ x.close }}</td>
+        <td>{{ x.capacity }}</td>
+        <td>
+            {% for activity in x.activities %}
+            {{ activity }}<br>
+            {% endfor %}
+        </td>
+        <td>
+            {% for price in x.prices %}
+            {{ price }}<br>
+            {% endfor %}
+        </td>
+        <td> <a href="/facility/{{x.id}}">
+                <button type="button" class="btn btn-success btn-sm">Book Facility</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+
+{% endblock %}

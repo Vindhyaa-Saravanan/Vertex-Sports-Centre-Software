@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content%}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="m-5">
+    <h3>Manager Login</h3>
+    <hr>
+    <br>
+
+    <!-- Manager login form -->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <!-- Email -->
+            <label for="email">Email</label>
+            <br>
+            {{ form.email(class="form-control", placeholder="Enter email") }}
+        </div>
+        <div class="form-group">
+            <!-- Password -->
+            <label for="password">Password</label>
+            <br>
+            {{ form.password(class="form-control", placeholder="Enter password") }}
+        </div>
+        <br />
+        <!-- Submit -->
+        <button type="submit" class="custom-btn">Login</button>
+    </form>
+
+    <br>
+
+</div>
+</div>
+{% endblock %}

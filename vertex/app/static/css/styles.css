@@ -1,0 +1,490 @@
+/* static/styles.css */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /*background: linear-gradient(to bottom, #fdfbfb, #ebedee 60%, #cbcfd4);*/
+    /*background: linear-gradient(to top, #c8f1b1, #ffffff);*/
+    /*background-image: url("/static/images/bodybg.jpg");*/
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+}
+
+h1 {
+    font-size: xx-large;
+    font-family: 'Times New Roman';
+    padding: 5px;
+}
+
+h2 {
+    font-size: xx-large;
+    font-family: 'Times New Roman';
+    font-weight: 200;
+    font-style: oblique;
+    padding: 5px;
+}
+
+p {
+    font-size: large;
+    font-family: 'Times New Roman';
+    font-weight: 150;
+    padding: 5px;
+}
+
+/* Navigation bar from Bootstrap formatting*/
+.navbar {
+    padding: 0px;
+    height: 50px;
+}
+
+.navbar-brand {
+    font-size: x-large;
+    font-family: 'Times New Roman';
+    font-style: italic;
+    font-weight: 500;
+}
+
+.nav-item {
+    font-size: large;
+    font-family: 'Times New Roman';
+    font-style: normal;
+    font-weight: 300;
+}
+
+.navbar-text {
+    font-size: large;
+    font-family: 'Times New Roman';
+    font-style: normal;
+    font-weight: 300;
+}
+
+.nav a:hover {
+    font-size: x-large;
+    font-family: 'Times New Roman';
+    font-style: normal;
+    font-weight: 300;
+    color: forestgreen;
+}
+
+/* User table for user management system */
+
+table.user-table {
+    width: 70%;
+}
+
+table.user-table td {
+    /* First column */
+    width: 5%;
+}
+
+table.user-table td:nth-of-type(2n) {
+    /* Second column */
+    width: 10%
+}
+
+
+/* Facilities table for management system */
+
+table.facilities-table {
+    width: 80%;
+}
+
+table.facilities-table td {
+    /* All columns */
+    width: 10%;
+}
+
+table.facilities-table td:nth-of-type(2n) {
+    /* Second column */
+    width: 20%
+}
+
+table.facilities-table td:nth-of-type(3n) {
+    /* Third column */
+    width: 20%;
+}
+
+/* Class table for management system */
+
+table.class-table {
+    /* Whole table */
+    width: 80%;
+}
+
+table.class-table td {
+    /* Each column */
+    width: 10%;
+}
+
+
+/* Gym classes list table */
+.timetable {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+div.transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 80%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myInput1 {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 80%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myTable {
+    border-collapse: collapse;
+    width: 80%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+#myTable th,
+#myTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#myTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header,
+#myTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+#myTable1 {
+    border-collapse: collapse;
+    width: 80%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+#myTable1 th,
+#myTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#myTable1 tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable1 tr.header,
+#myTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Fullcalendar */
+
+#fullcalendar {
+    width: 80%;
+}
+
+#calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+
+/* Carousel for index page
+based on
+https://getbootstrap.com/docs/4.0/examples/
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    bottom: 4rem;
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+    height: 28rem;
+    background-color: #777;
+}
+
+.carousel-item>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 28rem;
+}
+
+/* Center align the text within the three columns below the carousel */
+.infocircles .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.infocircles h2 {
+    font-weight: 400;
+}
+
+.infocircles .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+/* Featurettes */
+.featurette-divider {
+    margin: 4rem 0;
+}
+
+.featurette-image-container {
+    height: 100%;
+    position: relative;
+  }
+  
+  .featurette-image-container::before {
+    content: "";
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    z-index: 1;
+  }
+  
+  .featurette-image-container img {
+    position: relative;
+    z-index: 2;
+  }
+  
+
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+    font-size: xx-large;
+}
+
+.featurette-image {
+    position: relative;
+}
+
+.featurette-image:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.custom-btn {
+    transition-duration: 0.4s;
+}
+
+.custom-btn:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.custom-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Define the ripple effect on hover */
+.custom-btn:hover {
+    background-color: #3e8e41;
+    /* Darker green */
+}
+
+.custom-btn:after {
+    content: "";
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.custom-btn:hover:after {
+    opacity: 1;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
+}
+
+/* Membership */
+.pricing-box {
+    -webkit-box-shadow: 0px 5px 30px -10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 30px -10px rgba(0, 0, 0, 0.1);
+    padding: 35px 50px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.background-image {
+    background-image: url('/static/images/backgroundimage.jpeg');
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.transparent-column {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    margin: auto;
+    margin-top: 40px;
+    max-width: 900px;
+    min-height: 500px;
+}
+
+.transparent-background {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-top: 50px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: medium;
+    color: #e1eee5;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #18a12f;
+}
+
+.sidebar_heading {
+    color: #188c39;
+}
+
+.main_manager_content {
+    margin-left: 160px;
+    /* Margin to the left equal to the width of the manager sidenav */
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+/* Responsive CSS for manager index cards */
+@media (max-width: 800px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width: 800px) {
+    .card-columns {
+        column-count: 2;
+    }
+}

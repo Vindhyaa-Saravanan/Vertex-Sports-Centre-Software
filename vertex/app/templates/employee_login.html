@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content%}
+<div class="background-image"></div>
+<div class="transparent-column">
+    <div class="m-5">
+        <h3>Employee Login</h3>
+        <hr>
+        <br>
+
+        <!-- User login form -->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <!-- Email -->
+                <label for="email">Email</label>
+                <br>
+                {{ form.email(class="form-control", placeholder="Enter email") }}
+            </div>
+            <div class="form-group">
+                <!-- Password -->
+                <label for="password">Password</label>
+                <br>
+                {{ form.password(class="form-control", placeholder="Enter password") }}
+            </div>
+            <br />
+            <!-- Submit -->
+            <button type="submit" class="custom-btn">Login</button>
+        </form>
+
+        <br>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
+</div>
+{% endblock %}

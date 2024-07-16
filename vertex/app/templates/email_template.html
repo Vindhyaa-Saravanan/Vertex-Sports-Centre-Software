@@ -1,0 +1,30 @@
+<!-- vertex/app/templates/email_confirmation.html -->
+
+<!-- This is a template for the email to be sent, not for a HTML page. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- PAGE HEADER -->
+
+<head>
+</head>
+
+<!-- PAGE BODY -->
+
+<body>
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Vertex!</h1>
+    <p class="lead">Thanks for signing up to Vertex.</p>
+    <hr class="my-4">
+    <p>Please click here to confirm your email address:</p>
+    <p class="lead">
+      <a href="{{ confirm_url }}">
+        <button type="button" class="btn btn-outline-primary btn-sm">Confirm my Email</button>
+      </a>
+    </p>
+  </div>
+</body>
+
+</html>

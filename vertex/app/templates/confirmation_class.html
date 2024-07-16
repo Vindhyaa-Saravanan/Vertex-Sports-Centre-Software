@@ -1,0 +1,29 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted -->
+{% block content %}
+
+<div class="background-image"></div>
+	<div class="transparent-column">
+        <h1>You have booked the {{class_name}}</h1>
+        <h2>Enter the Customer details to book</h2>
+     
+        <form method="POST" action="{{ url_for('public.id_class', class_id=class_id) }}">
+            {{ form.hidden_tag() }}
+            <!--{% if current_user.user_type == "employee" %}-->
+                <p> <!-- User booked-->
+                    <label for="user_class_booked">Enter Customer's Email:</label>
+                    {{ form.user_class_booked(placeholder="User's email") }}<br>
+                    {% for error in form.user_class_booked.errors %}
+                        [{{ error }}]
+                    {% endfor %}
+                </p>
+    
+            <button type="submit" class="btn btn-primary">Pay for the class</button>
+       <!-- {% endif %}-->
+        </form>
+        </div>
+    
+
+{% endblock %}

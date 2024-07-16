@@ -1,0 +1,66 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+	<h3>
+		<a href="{{url_for('admin.index')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+		</a>
+		<a href="{{url_for('admin.new_class')}}">
+			<button type="button" class="btn btn-outline-success btn-sm ml-1">Add a new class</button>
+		</a>
+		<br><br>
+		Class table
+	</h3>
+
+	<hr>
+
+	<input type="text" id="myInput" onkeyup="myTableSearchFunction()" placeholder="Search for entry by name.." title="Type in a name">
+
+	<table class="class-table" id="myTable">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Start</th>
+			<th>Duration</th>
+			<th>Price</th>
+			<th>Bookings</th>
+		</tr>
+		{% for class in classes %}
+		<tr>
+			<td>{{class["id"]}}</td>
+			<td>{{class["name"]}}</td>
+			<td>{{class["date"]}}</td>
+			<td>{{class["start"]}}</td>
+			<td>{{class["duration"]}}</td>
+			<td>{{class["price"]}}</td>
+			<td>{{class["num_of_bookings"]}}</td>
+			<td>
+				<a href="{{ url_for('admin.edit_class', id=class['id']) }}">
+					<button type="button" class="btn btn-outline-primary btn-sm">Edit Class</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+
+{% endblock %}

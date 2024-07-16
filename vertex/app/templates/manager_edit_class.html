@@ -1,0 +1,87 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.classes')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to class list</button>
+		</a>
+		<a href="{{ url_for('admin.delete_class', id=target['id']) }}">
+			<button class="btn btn-outline-danger ml-1 btn-sm">Delete class</button>
+		</a>
+		<br><br>
+		Editing class {{target["id"]}}
+	</h3>
+
+	<hr>
+
+	<div class="ml-4">
+		<p>Blank fields will remain unchanged.</p>
+		<form method="POST" action="{{ url_for('admin.edit_class', id=target['id']) }}">
+			{{ form.hidden_tag() }}
+			<table width="60%">
+				<tr>
+					<td>Old name:</td> 
+					<td>{{target["name"]}}</td>
+					<td>New name:</td> 
+					<td>{{ form.new_name(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old start time:</td>
+					<td>{{target["start"]}}</td>
+					<td>New start time:</td>
+					<td>{{ form.new_start(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old duration:</td>
+					<td>{{target["duration"]}}</td>
+					<td>New duration:</td>
+					<td>{{ form.new_duration(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old date:</td>
+					<td>{{target["date"]}}</td>
+					<td>New date:</td>
+					<td>{{ form.new_date(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old price:</td>
+					<td>{{target["price"]}}</td>
+					<td>New price:</td>
+					<td>{{ form.new_price(value='') }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Submit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.index')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+		</a>
+		<a href="{{url_for('admin.new_user')}}">
+			<button type="button" class="btn btn-outline-success btn-sm ml-1">Add a new user</button>
+		</a>
+		<br><br>
+		Users table
+	</h3>
+
+	<hr>
+
+	<input type="text" id="myInput" onkeyup="myTableSearchFunction()" placeholder="Search for entry by name.." title="Type in a name">
+	<table class="user-table" id="myTable">
+		<tr>
+			<th>ID</th>
+			<th>Email</th>
+			<th>Name</th>
+			<th>User type</th>
+		</tr>
+		{% for user in users %}
+		<tr>
+			<td>{{user["id"]}}</td>
+			<td>{{user["email"]}}</td>
+			<td>{{user["firstname"]}} {{user["lastname"]}}</td>
+			<td>{{user["user_type"]}}</td>
+			<td>
+				<a href="{{ url_for('admin.edit_user', id=user['id']) }}">
+					<button type="button" class="btn btn-outline-primary btn-sm">Edit User</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+</div>
+
+{% endblock %}

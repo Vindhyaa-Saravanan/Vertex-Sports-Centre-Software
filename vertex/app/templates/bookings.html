@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ml-5 mt-5 mr-5">
+	<div class="background-image"></div>
+	<div class="transparent-column">
+	<h3 class="text-center">My Bookings</h3>
+
+	<p class="text-center">View all your gym class bookings and facility reservations here!</p>
+
+	<h3>My Class Bookings</h3>
+
+	<input type="text" id="myInput" onkeyup="myTableSearchFunction()" placeholder="Search for entry by name.."
+		title="Type in a name">
+
+	<table class="class-table" id="myTable">
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Start</th>
+			<th>Duration</th>
+		</tr>
+		{% for class in classes %}
+		<tr>
+			<td>{{class["name"]}}</td>
+			<td>{{class["date"]}}</td>
+			<td>{{class["start"]}}</td>
+			<td>{{class["duration"]}} hour</td>
+			<td>
+				<a href="/bookings/{{ class['id'] }}?booking_type=class">
+					<button type="button" class="btn btn-success btn-sm">Delete Class Booking</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<br>
+	<h3>My Facility Bookings</h3>
+
+	<input type="text" id="myInput1" onkeyup="myTableSearchFunction1()" placeholder="Search for entry by name.."
+		title="Type in a name">
+	<table class="facilities-table" id="myTable1">
+		<tr>
+			<th>Name</th>
+			<th>Activity</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Date</th>
+		</tr>
+		{% for facility in facilities %}
+		<tr>
+			<td>{{facility["name"]}}</td>
+			<td>{{facility["activity"]}}</td>
+			<td>{{facility["start"]}}</td>
+			<td>{{facility["end"]}}</td>
+			<td>{{facility["date"]}}</td>
+			<td>
+				<a href="/bookings/{{facility.id}}?booking_type=facility">
+					<button type="button" class="btn btn-success btn-sm">Delete Facility Booking</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<br>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.users')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to user list</button>
+		</a>
+		<a href="{{ url_for('admin.delete_user', id=user['id']) }}">
+			<button class="btn btn-outline-danger ml-1 btn-sm" onclick="">Delete user</button>
+		</a>
+		<a href="{{ url_for('admin.reset_password', id=user['id']) }}">
+			<button class="btn btn-outline-primary ml-1 btn-sm" role="button">Reset password</button>
+		</a>
+		<br><br>
+		Editing user {{user["id"]}}
+	</h3>
+
+	<hr>
+
+	<div class="ml-4">
+		<h5>Edit email</h6>
+		<form method="POST" action="{{ url_for('admin.edit_email', id=user['id']) }}">
+			{{ edit_email.hidden_tag() }}
+			<table width="30%">
+				<tr>
+					<td>Old email:</td> 
+					<td>{{user["email"]}}</td>
+				</tr>
+				<tr>	
+					<td>New email:</td> 
+					<td>{{ edit_email.new_email() }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Edit email">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<hr>
+
+	<div class="ml-4">
+		<h5>Edit name</h6>
+		<form method="POST" action="{{ url_for('admin.edit_name', id=user['id']) }}">
+			{{ edit_name.hidden_tag() }}
+			<table width="30%">
+				<tr>
+					<td>Old name:</td>
+					<td>{{user["firstname"]}} {{user["lastname"]}}</td>
+				</tr>
+				<tr>
+					<td>New first name:</td>
+					<td>{{ edit_name.new_firstname() }}</td>
+				</tr>
+				<tr>
+					<td>New last name:</td>
+					<td>{{ edit_name.new_lastname() }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Edit name">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br>
+</div>
+</div>
+
+{% endblock %}

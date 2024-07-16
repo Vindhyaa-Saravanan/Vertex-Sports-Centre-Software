@@ -1,0 +1,248 @@
+<!-- templates/base.html -->
+<!-- Base HTML template page extended by all other webpages -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- PAGE HEADER -->
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom asset management -->
+    <!-- <link href="../static/css/styles.css" rel="stylesheet"> -->
+    {% assets "js_all" -%}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
+    {% assets "css_all" -%}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {%- endassets %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/930f5d5df2.js" crossorigin="anonymous"></script>
+
+    <!-- FAVICON-->
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    <!-- PAGE TITLE -->
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>No title</title>
+    {% endif %}
+
+</head>
+
+
+<!-- PAGE BODY -->
+
+<body>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    {% if current_user.user_type != 'manager' %}
+    <!-- Bootstrap Navigation Bar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+
+        <!-- Brand/logo -->
+        <a class="navbar-brand" style="padding-left: 10px;" href="/">
+            <img src="/static/images/logo.jpeg" alt="Logo" style="width: 40px; height: 40px;">
+        </a>
+        <a class="navbar-brand" href="/">Vertex Sports</a>
+    
+
+        <!-- Navbar -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                      </svg>  
+                    Home
+                    </a>
+
+                <!-- Show the following only if user is logged in -->
+                {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="/facilities">Facilities</a>
+                <a class="nav-item nav-link" href="/classes">Classes</a>
+                <a class="nav-item nav-link" href="/bookings">Bookings</a>
+                <a class="nav-item nav-link" href="/my_memberships">Membership</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+                {% endif %}
+                
+            </div> 
+            <!--Search Box-->
+            <div class="ml-auto">
+                <form class="form-inline my-2 my-lg-0" action="/" method="GET">
+                    <div class="mr-sm-2">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                    <button class="btn btn-success" type="button" onclick="search()">Search</button>
+                </div>
+                </form>
+            </div>
+
+
+            <script>
+                function search() {
+                    var query = document.getElementById('searchInput').value;
+                    var url = 'http://127.0.0.1:5000/' + query.toLowerCase();
+                    console.log('search query:', query);
+                    console.log('redirecting to:', url);
+                    window.location.href = url;
+                }
+            </script>
+
+            {% if not current_user.is_authenticated %}
+                <!--Dropdown menu for login and sign up for users-->
+                <div class="dropdown">
+                    <button class="nav-item ml-auto btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-regular fa-user"></i> Sign Up / Login
+                    </button>
+                    <div class="nav-item dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/customer-signup">Customer Sign Up</a>
+                      <a class="dropdown-item" href="/login">Customer Login</a>
+                      <!-- 
+                      <a class="dropdown-item" href="/employee-login">Employee Login</a>
+                      <a class="dropdown-item" href="/admin/login">Manager Login</a>
+                    -->
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div id="google_translate_element" class="text-right"></div>
+            
+        </div>
+
+    </nav>
+    {% endif %}
+
+    <!-- MANAGER NAVBAR -->
+    {% if current_user.user_type == 'manager' %}
+    <!-- Bootstrap Navigation Bar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+
+        <!-- Brand/logo (to be added when logo is finalized) -->
+        <a class="navbar-brand" href="/">
+            <img src="/static/images/logo.jpeg" alt="Logo" style="width: 40px;">
+        </a>
+        <a class="navbar-brand" href="/">Vertex Sports</a>
+
+        <!-- Navbar -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href=" {{ url_for('admin.index') }}">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+    {% endif %}
+
+
+    <!-- FLASHED MESSAGES -->
+    {% if current_user.user_type != 'manager' %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+
+    {% if current_user.user_type == 'manager' %}
+    <!-- Manager Sidenav -->
+    <!-- based on ideas from -->
+    <!-- https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp -->
+    <div class="sidenav">
+        <a href="#about"></a>
+        <h2 class="sidebar_heading">Manage</h2>
+        <a href=" {{ url_for('admin.users') }}">Users</a>
+        <a href=" {{ url_for('admin.classes') }}">Classes</a>
+        <a href=" {{ url_for('admin.facilities') }}">Facilities</a>
+        <a href=" {{ url_for('admin.memberships') }}">Memberships</a>
+        <a href=" {{ url_for('admin.discount') }}">Discounts</a>
+        <h2 class="sidebar_heading">Analyze</h2>
+        <a href=" {{ url_for('admin.analytics_facilities') }}">Facilities Stats</a>
+        <a href=" {{ url_for('admin.analytics_classes') }}">Classes Stats</a>
+        <a href=" {{ url_for('admin.analytics_membership') }}">Membership Stats</a>
+        <a href=" {{ url_for('admin.sales') }}">Sales Stats</a>
+        <a href=" {{url_for('admin.logout')}} ">Logout</a>
+    </div>
+    {% endif %}
+
+    <!-- PAGE BODY BLOCK CONTENT -->
+    {% block content %}
+    {% endblock %}
+
+
+
+    <!-- Custom Javascript -->
+    <script src="../static/js/javascript.js"></script>
+
+    <!-- Optional JavaScript for Bootstrap-->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/930f5d5df2.js" crossorigin="anonymous"></script>
+
+    <!-- This document validates as CSS level 3 + SVG -->
+    <div class="ml-5 mr-5">
+        <p>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img text-align=center style="border:0;width:88px;height:31px"
+                    src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" />
+            </a>
+        </p>
+    </div>
+
+</body>
+<!-- FOOTER -->
+<footer class="text-lg-start bg-dark text-muted">
+    <div class="text-right">
+    <a type="button" class="btn btn-success" href="/employee-login">Employee Login</a>
+    <a type="button" class="btn btn-success" href="/admin/login">Manager Login</a>
+</div>
+    <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    Copyright © 2023. All rights reserved. Privacy Policy </div>
+  <!-- Copyright -->
+</footer>
+
+</html>

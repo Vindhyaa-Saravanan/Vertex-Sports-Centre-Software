@@ -1,0 +1,19 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="m-5">
+	<h3>{{ message }}</h3>
+</div>
+
+{% if redirect %}
+<script>
+	setTimeout('window.location.replace("{{redirect}}");', 500);
+</script>
+{% endif %}
+</div>
+
+{% endblock %}

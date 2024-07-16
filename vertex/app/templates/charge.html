@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+      <div class="ml-5 mt-5 mr-5">
+            <h1>Payment Successful!</h1>
+
+            <h2>Thank you for choosing Vertex!</h2> <br>
+            
+            <p>Your payment of <strong>£{{price}}</strong> has been successfully completed!</p> <br>
+
+            <a href="{{url_for('public.download', price=price, discount=discount)}}">
+                  <button type="button" onclick='' class="btn btn-success">Download PDF Receipt</button>
+            </a>
+
+            <br>
+            <h3>Payment Summary</h3>
+
+            <table class="class-table">
+              <tr>
+                <th>Serial Number</th>
+                <th>Item Description</th>
+                <th>Item Price</th>
+              </tr>
+              <tr>
+                <th>1</th>
+                <th>Booking/Membership</th>
+                <th>£ {{price}}</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>Applied Discount</th>
+                <th>
+                  {% if discount == 0 %}
+                  0 %
+                  {% endif %}
+                  
+                  {% if discount != 0 %}
+                  {{ discount }} %
+                  {% endif %}
+                </th>
+              </tr>
+            </table>
+
+            <a href="{{url_for('public.index')}}">
+                  <button type="button" onclick='' class="btn btn-success">Return to Homepage</button>
+                </a>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<!-- templates/new_membership.html -->
+<!-- HTML page to display options of memberships for users to choose from -->
+
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="ml-5 mt-5">
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="title-box text-center">
+						<h3 class="title-heading mt-4">Available Membership Schemes </h3>
+						<p class="text-muted f-17 mt-3">At Vertex, we take fitness seriously. Choose from our monthly or annual membership options 
+							to start acheiving your fitness goals.</p>
+					</div>
+				</div>
+			</div>
+			
+		<section class="section" id="pricing">
+		<div class="container">
+        
+			<div class="row mt-5 justify-content-center">
+			{% for membership in memberships %}
+
+			<div class="col-md-4">
+				<div class="pricing-box text-center">
+					
+				  <div class="h1 card-body">
+					<h4 class="my-0 font-weight-normal .text-center ">{{membership.name}}</h4>
+				  </div>
+				  <div class="card-body">
+					<h1 class="pricing-plan mt-2">£{{membership.price}}<small class="text-muted">/{{membership.months}} months</small></h1>
+					<a href='/new_membership/{{membership.id}}'>
+						<button type="button" class="btn btn-lg btn-success">Choose this plan</button>
+					</a>
+				  </div>
+				</div>
+			  </div>
+			{% endfor %}
+	    </div>
+	
+	
+	</div>
+	</section>
+		
+
+</div>
+</div>
+
+
+{% endblock %}

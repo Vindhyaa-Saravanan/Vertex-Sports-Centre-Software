@@ -1,0 +1,87 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.facilities')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to facility list</button>
+		</a>
+		<a href="{{ url_for('admin.delete_facility', id=facility['id']) }}">
+			<button class="btn btn-outline-danger ml-1 btn-sm">Delete facility</button>
+		</a>
+		<br><br>
+		Editing facility {{facility["id"]}}
+	</h3>
+
+	<hr>
+
+	<div class="ml-4">
+		<p>Blank fields will remain unchanged.</p>
+		<form method="POST" action="{{ url_for('admin.edit_facility', id=facility['id']) }}">
+			{{ form.hidden_tag() }}
+			<table width="60%">
+				<tr>
+					<td>Old name:</td> 
+					<td>{{facility["name"]}}</td>
+					<td>New name:</td> 
+					<td>{{ form.new_name(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old open time:</td>
+					<td>{{facility["open"]}}</td>
+					<td>New open time:</td>
+					<td>{{ form.new_open(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old close time:</td>
+					<td>{{facility["close"]}}</td>
+					<td>New close time:</td>
+					<td>{{ form.new_close(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old capacity:</td>
+					<td>{{facility["capacity"]}}</td>
+					<td>New capacity:</td>
+					<td>{{ form.new_capacity(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old session duration:</td>
+					<td>{{facility["session_duration"]}}</td>
+					<td>New session duration:</td>
+					<td>{{ form.new_session_duration(value='') }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Submit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br>
+</div>
+</div>
+
+{% endblock %}

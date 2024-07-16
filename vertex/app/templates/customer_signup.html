@@ -1,0 +1,69 @@
+<!-- templates/customer_signup.html -->
+<!-- Basic customer signup page -->
+
+{% extends "base.html" %} 
+
+{% block title %}
+Sign Up
+{% endblock %} 
+
+{% block content %}
+<!-- Title -->
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="m-5">
+<h3>Sign Up</h3>
+
+    <form method="POST" action="{{ url_for('public.sign_up') }}">
+
+        <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <br/>
+        {{ form.hidden_tag() }}
+        {{ form.email(class="form-control", placeholder="Enter email address") }}
+    </div>
+
+         <!-- Firstname-->
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <br/>
+        {{ form.first_name(class="form-control", placeholder="Enter first name") }}
+    </div>
+
+     <!-- Lastname-->
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <br/>
+        {{ form.last_name(class="form-control", placeholder="Enter last name") }}
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password1">Password</label>
+      <br/>
+      {{ form.password1(class="form-control", placeholder="Enter password") }}
+    </div>
+
+    <!-- Repeat Password -->
+    <div class="form-group">
+      <label for="password2">Password (Confirm)</label>
+      <br/>
+      {{ form.password2(class="form-control", placeholder="Re-enter password") }}
+    </div>
+    
+
+    <!-- Date of birth -->
+    <div class="form-group">
+      <label for="date_of_birth">Date of Birth</label>
+      <br/>
+      {{ form.date_of_birth(class="form-control", placeholder="Enter date of birth") }}
+    </div>
+
+      <!-- Submit -->
+      <br/>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+  </div>
+    {% endblock %}

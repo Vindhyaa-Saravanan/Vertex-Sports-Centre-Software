@@ -1,0 +1,37 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content" id="main-manager-body">
+<div class="m-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <a href="{{url_for('admin.index')}}">
+        <button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+    </a>
+
+    <h3> Manager Analytics - Memberships</h3>
+
+    <a href="{{url_for('admin.download_memberships')}}">
+        <button type="button" onclick="downloadPDF()" class="btn btn-success">Download PDF Report</button>
+    </a>
+
+    <h2>Statistics for different types of memberships</h2>
+    <img src="/plots/11" alt="my plot">
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+	<div class="m-5">
+
+		{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+	<h3>
+		Logged in as {{id}} - {{"Manager" if manager else "ERROR"}}
+		<a href=" {{url_for('admin.logout')}} ">
+			<button role="button" class="ml-2 btn btn-outline-primary btn-sm">Log out</button>
+		</a>
+	</h3>
+	<!-- <br> -->
+	
+	<hr>
+	<br>
+
+	<!-- Card Columns -->
+	<!-- based on -->
+	<!-- https://getbootstrap.com/docs/4.0/components/card/#card-columns -->
+	<div class="card-columns">
+
+		<div class="card border-success">
+		  <div class="card-body text-center">
+			<h5 class="card-title">Facilities</h5>
+			<p class="card-text">View, edit and delete statistics for Vertex facilities.</p>
+			<a href=" {{ url_for('admin.facilities') }} ">
+				<button role="button" class="btn btn-outline-primary btn-sm">View and Edit Facilities</button>
+			</a>
+			<br>
+			<br>
+			<a href=" {{ url_for('admin.analytics_facilities') }} ">
+				<button role="button" class="btn btn-outline-primary btn-sm">Facilities Analytics</button>
+			</a>
+		  </div>
+		</div>
+
+		<div class="card border-success">
+			<div class="card-body text-center">
+			  <h5 class="card-title">Classes</h5>
+			  <p class="card-text">View, edit and delete statistics for Vertex classes.</p>
+			  <a href=" {{ url_for('admin.classes') }} ">
+				  <button role="button" class="btn btn-outline-primary btn-sm">View and Edit Classes</button>
+			  </a>
+			  <br>
+			  <br>
+			  <a href=" {{ url_for('admin.analytics_classes') }} ">
+				  <button role="button" class="btn btn-outline-primary btn-sm">Classes Analytics</button>
+			  </a>
+			</div>
+		  </div>
+
+		  <div class="card border-success">
+			<div class="card-body text-center">
+			  <h5 class="card-title">Memberships</h5>
+			  <p class="card-text">View, edit and delete statistics for Vertex memberships.</p>
+			  <a href=" {{ url_for('admin.memberships') }} ">
+				  <button role="button" class="btn btn-outline-primary btn-sm">View and Edit Memberships</button>
+			  </a>
+			  <br>
+			  <br>
+			  <a href=" {{ url_for('admin.analytics_membership') }} ">
+				  <button role="button" class="btn btn-outline-primary btn-sm">Memberships Analytics</button>
+			  </a>
+			</div>
+		  </div>
+
+		  <div class="card border-success">
+			<div class="card-body text-center">
+			  <h5 class="card-title">Discounts</h5>
+			  <p class="card-text">View, edit and delete discounts for Vertex memberships.</p>
+			  <a href=" {{ url_for('admin.discount') }} ">
+				  <button role="button" class="btn btn-outline-primary btn-sm">View and Edit Discounts</button>
+			  </a>
+			  <br>
+			</div>
+		  </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		Are you sure you want to delete {{target}} {{id}}?
+	</h3>
+
+	<h5>
+		This will also delete all associated records, such as bookings and active memberships.
+	</h5>
+
+	<br>
+
+	<a href="{{ url_for('admin.edit_' + target, id=id) }}">
+		<button role="button" class="btn btn-primary btn">Cancel</button>
+	</a>
+	<a href=" {{ url_for('admin.delete_' + target, id=id, confirm=True) }} ">
+		<button role="button" class="btn btn-outline-danger btn">Delete</button>
+	</a>
+
+	<br>
+
+</div>
+
+{% endblock %}

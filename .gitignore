@@ -1,0 +1,8 @@
+*.pyc
+instance/
+env/
+*.db
+.webassets-cache/
+.DS_STORE
+.vscode
+gen/

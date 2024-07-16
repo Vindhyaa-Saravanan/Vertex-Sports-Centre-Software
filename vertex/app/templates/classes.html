@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<script>
+		/**
+		 * Initialilse the calendar. 
+		 * See: https://fullcalendar.io/docs/
+		 */
+
+
+		let events = [];
+		{% for class in classes %}
+		events.push({
+			id: {{class["id"]}},
+			title: '{{class["name"]}} (£{{class["price"]}})',
+			start: '{{class["date"]}}T{{class["start"]}}',
+			end: '{{class["date"]}}T{{class["end"]}}',
+			//price:'{{class["price"]}}',
+			url: '{{ url_for("public.id_class", class_id=class["id"]) }}'
+		});
+		{% endfor %}
+
+		document.addEventListener('DOMContentLoaded', function() {
+
+			/* Get the <div> in which to place the calendar */
+			var calendarEl = document.getElementById('fullcalendar');
+
+			/* Initialise the calendar with some basic settings */
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView: 'dayGridMonth',
+				//timeFormat: 'h(:mm)a',
+				//height: 600,
+				events: events,
+				
+
+			    headerToolbar: {
+            	left: 'prev,today,next',
+            	center: 'title',
+            	right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+				allDaySlot: true,
+           		displayEventTime: true,
+            	displayEventEnd: true,
+
+			});
+
+			calendar.render();
+
+   			/* Filter Option */
+			   document.getElementById('class-filter').addEventListener('change', function() {
+				var filterName = this.value;
+				var filteredEvents = events.filter(function(event) {
+					return event.title.includes(filterName);
+				});
+				calendar.getEvents().forEach(function(event) {
+					if (!filteredEvents.includes(event)) {
+						event.remove();
+					}
+				});
+				calendar.addEventSource(filteredEvents);
+				calendar.refetchEvents();
+			});
+
+   });
+			/* Filter End */
+
+	</script>
+
+	<div class="background-image"></div>
+	<div class="transparent-column">
+	<div class="m-5">
+		<h3>Gym Classes</h3>
+		<hr>
+		<br>
+		<div class="text-right">
+		<label for="class-filter">Filter by Class:</label>
+			<select id="class-filter">
+				<option value="">All Classes</option>
+				<option value="Aerobics">Aerobics</option>
+				<option value="Pilates">Pilates</option>
+				<option value="Yoga">Yoga</option>
+			</select>
+		</div>
+		<br>
+		<br>
+			
+
+		<!-- FullCalendar -->
+		<!-- See https://fullcalendar.io/docs/ -->
+		<div id="calendar-container">
+  		<div id="fullcalendar"></div>
+		</div>
+	</div>
+	</div>
+
+{% endblock %}

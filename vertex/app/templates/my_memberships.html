@@ -1,0 +1,57 @@
+<!-- templates/my_memberships.html -->
+<!-- HTML page to display current_user's active memberships -->
+
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+<div class="ml-5 mt-5">
+
+	<h3>My Memberships</h3>
+    <hr>
+    <br>
+    <p>At Vertex, we take fitness seriously. Choose from our monthly or annual membership options 
+        to start acheiving your fitness goals.
+    </p>
+
+	<br>
+	<!-- If current_user is a member, show membership details and cancel button -->
+	{% if activemembership != None %}
+	<table class="class-table">
+		<tr>
+			<th>Membership</th>
+			<th>Status</th>
+            <th>From</th>
+			<th>Valid Till</th>
+            <th>Amend</th>
+		</tr>
+
+		<tr>
+			<td>{{ membership.name }}</td>
+			<td>Active</td>
+            <td>{{ activemembership.member_from }}</td>
+			<td>{{ activemembership.member_till }}</td>
+			<td>
+				<a href="{{ url_for('public.cancel_membership') }}">
+					<button type="button" class="btn btn-outline-success btn-sm">Cancel Membership</button>
+				</a>
+			</td>
+		</tr>
+        {% endif %}
+
+        <!-- if current_user is not a member -->
+        {% if activemembership == None %}
+        <p>You have no active memberships. 
+            <a href="{{ url_for('public.new_membership') }}">
+                <button type="button" class="btn btn-outline-success btn-sm">Sign Up for a Membership</button>
+            </a></p>
+        {% endif %}
+
+	</table>
+</div>
+</div>
+
+{% endblock %}

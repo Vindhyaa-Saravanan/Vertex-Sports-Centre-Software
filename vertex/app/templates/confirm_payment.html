@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="background-image"></div>
+	<div class="transparent-column">
+      <div class="ml-5 mt-5 mr-5">
+            <h1>Payment in process</h1>
+            
+            <p>Please confirm your payment of <strong>£{{price}}</strong></p> from your saved card details.<br>
+
+            <a href="{{redirect}}?price={{price}}&confirm=true">
+                  <button type="button" onclick='' class="btn btn-success">Proceed</button>
+			</a>
+
+			<a href="{{url_for('public.index')}}">
+                  <button type="button" onclick='' class="btn btn-danger">Cancel</button>
+			</a>
+</div>
+</div>
+
+{% endblock %}

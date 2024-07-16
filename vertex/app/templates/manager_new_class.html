@@ -1,0 +1,62 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="m-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+	<h3>
+		<a href="{{url_for('admin.classes')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to class list</button>
+		</a>
+		<br><br>
+		Create new class
+	</h3>
+
+	<hr>
+
+	<div>
+		<form method="POST" action="{{ url_for('admin.new_class') }}">
+			{{ form.hidden_tag() }}
+			{{ form.name(placeholder="Name", class="form-control mb-2") }}
+			
+			<table>
+				<tr>
+					<td>Date:</td>
+					<td>{{ form.date() }}</td>
+				</tr>
+				<tr>
+					<td>Start time:</td>
+					<td>{{ form.start(class="form-control mb-2") }}</td>
+				</tr>
+			</table>
+
+			{{ form.duration(placeholder="Duration", class="form-control mb-2") }}
+
+			{{ form.price(placeholder="Price", class="form-control mb-2") }}
+			<br>
+			<input type="submit" name="btn" role="button" class="btn btn-sm btn-outline-primary" value="Create">
+		</form>
+	</div>
+
+	<br>
+
+
+</div>
+</div>
+
+{% endblock %}

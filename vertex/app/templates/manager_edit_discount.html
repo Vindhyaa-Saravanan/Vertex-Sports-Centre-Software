@@ -1,0 +1,75 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.discount')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to discount list</button>
+		</a>
+		<a href="{{ url_for('admin.delete_discount', id=target['id']) }}">
+			<button class="btn btn-outline-danger ml-1 btn-sm">Delete discount</button>
+		</a>
+		<br><br>
+		Editing discount {{target["id"]}}
+	</h3>
+
+	<hr>
+
+	<div class="ml-4">
+		<p>Blank fields will remain unchanged.</p>
+		<form method="POST" action="{{ url_for('admin.edit_discount', id=target['id']) }}">
+			{{ form.hidden_tag() }}
+			<table width="60%">
+				<tr>
+					<td>Old name:</td> 
+					<td>{{target["name"]}}</td>
+					<td>New name:</td> 
+					<td>{{ form.new_name(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old discount percentage value: (for ex: if 50%, enter 50)</td>
+					<td>{{target["value"]}}</td>
+					<td>New discount percentage value: (for ex: if 50%, enter 50)</td>
+					<td>{{ form.new_value(value='') }}</td>
+				</tr>
+				<tr>
+					<td>Old number of sessions required for discount to be availed:</td>
+					<td>{{target["session_number"]}}</td>
+					<td>New number of sessions required for discount to be availed:</td>
+					<td>{{ form.new_session_number(value='') }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<input class="btn btn-outline-primary btn-sm" name="btn" type="submit" value="Submit">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br>
+</div>
+</div>
+
+{% endblock %}

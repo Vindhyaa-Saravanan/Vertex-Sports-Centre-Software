@@ -1,0 +1,55 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content" id="main-manager-body">
+	<div class="m-5">
+
+		{% with messages = get_flashed_messages(with_categories=True) %}
+		{% if messages %}
+		{% for category, message in messages %}
+		<div class="alert alert-{{category}}" role="alert">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+
+		<a href="{{url_for('admin.index')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+		</a>
+
+
+		<h3> Manager Analytics - Facilities</h3>
+
+		<a href="{{url_for('admin.download_facilities')}}">
+            <button type="button" class="btn btn-success">Download PDF Report</button>
+        </a>
+
+		<h2>Usage statistics of the Climbing Wall over the last week</h2>
+		<img src="/plots/2" alt="Climbing Wall Stats">
+
+		<h2>Usage statistics of the Fitness Room over the last week</h2>
+		<img src="/plots/3" alt="Sports Hall Stats">
+
+		<h2>Usage statistics of the Sports Hall over the last week</h2>
+		<img src="/plots/4" alt="Sports Hall Stats">
+
+		<h2>Usage statistics of the Squash Courts over the last week</h2>
+		<img src="/plots/5" alt="Squash Courts Stats">
+
+		<h2>Usage statistics of the Studio over the last week</h2>
+		<img src="/plots/6" alt="Studio Stats">
+
+		<h2>Usage statistics of the Swimming pool over the last week</h2>
+		<img src="/plots/7" alt="Swimming Pool Stats">
+
+
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="m-5">
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+	<h3>
+		<a href="{{url_for('admin.facilities')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to facility list</button>
+		</a>
+		<br><br>
+		Create new facility
+	</h3>
+
+	<hr>
+
+	<div>
+		<form method="POST" action="{{ url_for('admin.new_facility') }}">
+			{{ form.hidden_tag() }}
+			{{ form.name(placeholder="Name", class="form-control mb-2") }}
+			
+			<table>
+				<tr>
+					<td>Opening time:</td>
+					<td>{{ form.open(class="form-control") }}</td>
+				</tr>
+				<tr>
+					<td>Closing time:</td>
+					<td>{{ form.close(class="form-control mb-2") }}</td>
+				</tr>
+			</table>
+
+			{{ form.capacity(placeholder="Capacity", class="form-control mb-2") }}
+			{{ form.session_duration(placeholder="Session duration", class="form-control mb-2") }}
+			<br>
+			<input type="submit" name="btn" role="button" class="btn btn-sm btn-outline-primary" value="Create">
+		</form>
+	</div>
+
+	<br>
+
+
+</div>
+</div>
+
+{% endblock %}

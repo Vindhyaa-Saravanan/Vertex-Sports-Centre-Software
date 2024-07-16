@@ -1,0 +1,58 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="background-image"></div>
+	<div class="transparent-column">
+    <h1>You have booked the {{facility_name}}</h1>
+
+    <form action="" method="post" name="confirmation-details">
+        {{ form.hidden_tag() }}
+
+        {% if current_user.user_type == "employee" %}
+            <p> <!-- User booked-->
+                <label for="user_booked">Enter Customer Email</label>
+                {{ form.user_booked(placeholder="User's email") }}<br>
+                {% for error in form.user_booked.errors %}
+                    [{{ error }}]
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        <p> <!--Activities-->
+            <label for="activity">What activity would you like to do in the {{facility_name}}?</label>
+            {{ form.activity }}<br>
+            {% for error in form.activity.errors %}
+                [{{ error }}]
+            {% endfor %}
+        </p>
+       
+        <p> <!--date chosen-->
+            <label for="date_chosen">What date would you like to book?</label>
+            {{ form.date_chosen }}<br>
+            {% for error in form.date_chosen.errors %}
+                [{{ error }}]
+            {% endfor %}
+        </p>
+    
+        <p> <!--Start times-->
+            <label for="start_time">What time would you like to start?</label>
+            {{ form.start_time }}<br>
+            {% for error in form.start_time.errors %}
+                [{{ error }}]
+            {% endfor %}
+        </p>
+
+        <p> <!--End times-->
+            <label for="end_time">What time would you like to end?</label>
+            {{ form.end_time }}<br>
+            {% for error in form.end_time.errors %}
+                [{{ error }}]
+            {% endfor %}
+        </p>
+        <button type="submit" class="btn btn-success">Pay for the class</button>
+    </form>
+</div>
+
+{% endblock %}

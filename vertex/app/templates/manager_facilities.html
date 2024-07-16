@@ -1,0 +1,62 @@
+<!-- Code to indicate this will extend the base.html page -->
+{% extends "base.html" %}
+
+<!-- Block content to be substituted on the index.html page -->
+{% block content %}
+
+</div>
+
+<!-- Content of the page -->
+<div class="main_manager_content">
+<div class="ml-5 mt-5">
+	{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+	<h3>
+		<a href="{{url_for('admin.index')}}">
+			<button type="button" class="btn btn-outline-primary btn-sm">Return to admin index</button>
+		</a>
+		<a href="{{url_for('admin.new_facility')}}">
+			<button type="button" class="btn btn-outline-success btn-sm ml-1">Add a new facility</button>
+		</a>
+		<br><br>
+		Facilities table
+	</h3>
+
+	<hr>
+
+	<input type="text" id="myInput" onkeyup="myTableSearchFunction()" placeholder="Search for entry by name.." title="Type in a name">
+	<table class="facilities-table" id="myTable">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Open times</th>
+			<th>Capacity</th>
+			<th>Session duration</th>
+		</tr>
+		{% for facility in facilities %}
+		<tr>
+			<td>{{facility["id"]}}</td>
+			<td>{{facility["name"]}}</td>
+			<td>{{facility["open"]}} - {{facility["close"]}}</td>
+			<td>{{facility["capacity"]}}</td>
+			<td>{{facility["session_duration"]}}</td>
+			<td>
+				<a href="{{ url_for('admin.edit_facility', id=facility['id']) }}">
+					<button type="button" class="btn btn-outline-primary btn-sm">Edit Facility</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+</div>
+
+{% endblock %}
