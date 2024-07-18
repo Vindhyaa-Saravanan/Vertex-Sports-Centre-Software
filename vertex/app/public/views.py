@@ -552,10 +552,10 @@ def id_class(class_id):
 				current_app.logger.info("Class ID " + str(class_id) + " not found for booking.")
 				return redirect('/classes')
 			
-			if target.date < datetime.datetime.now().date():
-				flash('Cannot book a past class.', category="danger")
-				current_app.logger.info("Class ID " + str(class_id) + " not bookable.")
-				return redirect('/classes')
+			# if target.date < datetime.datetime.now().date():
+			# 	flash('Cannot book a past class.', category="danger")
+			# 	current_app.logger.info("Class ID " + str(class_id) + " not bookable.")
+			# 	return redirect('/classes')
 		
 			# Create record for this new booking
 			class_booking = ClassBookings(user_id=current_user.id, class_id=int_class_id)
@@ -850,9 +850,9 @@ def facility_view(facility_id):
 
 			start_date = datetime.datetime.combine(date_chosen, start_time)
 
-			if start_date <= datetime.datetime.now():
-				flash("Cannot book in the past", category="danger")
-				return redirect(url_for('public.facility_view', facility_id=facility_id))
+			# if start_date <= datetime.datetime.now():
+			# 	flash("Cannot book in the past", category="danger")
+			# 	return redirect(url_for('public.facility_view', facility_id=facility_id))
 			
 			# testing to see if end is before start
 			if end_time < start_time:
