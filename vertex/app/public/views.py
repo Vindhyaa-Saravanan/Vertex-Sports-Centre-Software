@@ -2,6 +2,7 @@
 """
 Views for the "public" blueprint.
 """
+import os
 import datetime
 from .. import models
 import stripe
@@ -206,8 +207,11 @@ def sign_up():
 
 				# Define parts of email and send the email
 				email_subject = 'Vertex Sports | Confirm Email'
-				send_email(recipient=new_user.email, subject=email_subject, email_template=email_html_template)
-				current_app.logger.info("Sent confirmation email to user ID " + str(new_user.id) + " at " + str(datetime.datetime.now()))
+				if "PYTEST_CURRENT_TEST" not in os.environ:
+					send_email(recipient=new_user.email, subject=email_subject, email_template=email_html_template)
+					current_app.logger.info("Sent confirmation email to user ID " + str(new_user.id) + " at " + str(datetime.datetime.now()))
+				else:
+					current_app.logger.info("Not sending confirmation email, we're testing...")
 
 				login_user(new_user, remember=True)
 				current_app.logger.info("Newly created user ID " + str(new_user.id) + " logged in at " + str(datetime.datetime.now()))
