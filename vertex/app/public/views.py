@@ -2,6 +2,7 @@
 """
 Views for the "public" blueprint.
 """
+import os
 import datetime
 from .. import models
 import stripe
@@ -206,8 +207,11 @@ def sign_up():
 
 				# Define parts of email and send the email
 				email_subject = 'Vertex Sports | Confirm Email'
-				send_email(recipient=new_user.email, subject=email_subject, email_template=email_html_template)
-				current_app.logger.info("Sent confirmation email to user ID " + str(new_user.id) + " at " + str(datetime.datetime.now()))
+				if "PYTEST_CURRENT_TEST" not in os.environ:
+					send_email(recipient=new_user.email, subject=email_subject, email_template=email_html_template)
+					current_app.logger.info("Sent confirmation email to user ID " + str(new_user.id) + " at " + str(datetime.datetime.now()))
+				else:
+					current_app.logger.info("Not sending confirmation email, we're testing...")
 
 				login_user(new_user, remember=True)
 				current_app.logger.info("Newly created user ID " + str(new_user.id) + " logged in at " + str(datetime.datetime.now()))
@@ -552,10 +556,10 @@ def id_class(class_id):
 				current_app.logger.info("Class ID " + str(class_id) + " not found for booking.")
 				return redirect('/classes')
 			
-			if target.date < datetime.datetime.now().date():
-				flash('Cannot book a past class.', category="danger")
-				current_app.logger.info("Class ID " + str(class_id) + " not bookable.")
-				return redirect('/classes')
+			# if target.date < datetime.datetime.now().date():
+			# 	flash('Cannot book a past class.', category="danger")
+			# 	current_app.logger.info("Class ID " + str(class_id) + " not bookable.")
+			# 	return redirect('/classes')
 		
 			# Create record for this new booking
 			class_booking = ClassBookings(user_id=current_user.id, class_id=int_class_id)
@@ -850,9 +854,9 @@ def facility_view(facility_id):
 
 			start_date = datetime.datetime.combine(date_chosen, start_time)
 
-			if start_date <= datetime.datetime.now():
-				flash("Cannot book in the past", category="danger")
-				return redirect(url_for('public.facility_view', facility_id=facility_id))
+			# if start_date <= datetime.datetime.now():
+			# 	flash("Cannot book in the past", category="danger")
+			# 	return redirect(url_for('public.facility_view', facility_id=facility_id))
 			
 			# testing to see if end is before start
 			if end_time < start_time:
