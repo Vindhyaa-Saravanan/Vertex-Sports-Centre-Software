@@ -161,12 +161,12 @@ See the [open issues](https://github.com/uol-feps-soc-comp2913-2223s2-classroom/
 
 ### Squad 30
 
-* Divyashri Ravichandran - [@DivyashriRavichandran](https://github.com/DivyashriRavichandran) - sc21dr@leeds.ac.uk
-* Theo Addis - [@27theo](https://github.com/27theo) - sc21tcda@leeds.ac.uk
-* Kavya Pothapragada - [@sc21k2p](https://github.com/sc21k2p) - sc21k2p@leeds.ac.uk
-* Vindhyaa Saravanan - [@Vindhyaa-Saravanan](https://github.com/Vindhyaa-Saravanan) - sc21vs@leeds.ac.uk
-* Aidan Nash - [@aidann21](https://github.com/aidann21) - sc21an@leeds.ac.uk
-* Ilham Abdullayev - [@sc20ia](https://github.com/sc20ia) - sc20ia@leeds.ac.uk
+* Divyashri Ravichandran
+* Theo Addis
+* Kavya Pothapragada
+* Vindhyaa Saravanan
+* Aidan Nash
+* Ilham Abdullayev
 
 
 ### Project Links:
